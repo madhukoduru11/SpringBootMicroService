@@ -1,0 +1,54 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Integration Testing
+  description: Integration Testing
+  contact:
+    email: madhuracts@gmail.com
+tags:
+  - name: blog
+    description: Operations about blog
+    externalDocs:
+      description: Find out more about our site
+      url: http://swagger.io
+paths:
+  /blog/{blogtitle}:
+    get:
+      tags:
+        - blog
+      summary: Get the blog by title
+      operationId: getBlogByTitle
+      parameters:
+        - name: blogtitle
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Blog'
+        404:
+          description: Blog not found
+          content: { }
+components:
+  schemas:
+    Blog:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        blogtitle:
+          type: string
+        content:
+          type: string
+        createdate:
+          type: string
+          format: date
+          example: 22-06-2021
